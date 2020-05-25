@@ -1,0 +1,12 @@
+.metadata
+.ut.dat
+RemoteSystemsTempFiles
+
+language.settings.xml
+
+*.axf
+*.mk
+*.o
+
+.lock
+.log
