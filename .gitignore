@@ -1,5 +1,6 @@
 .metadata
 .ut.dat
+debugger/.td.dat
 RemoteSystemsTempFiles
 
 language.settings.xml
@@ -10,3 +11,4 @@ language.settings.xml
 
 .lock
 .log
+*.prefs

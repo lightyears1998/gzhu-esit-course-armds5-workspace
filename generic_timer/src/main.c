@@ -10,7 +10,7 @@
 // evaluation.
 //
 // You accept that the Software has not been tested by Arm therefore the Software
-// is provided “as is”, without warranty of any kind, express or implied. In no
+// is provided as is, without warranty of any kind, express or implied. In no
 // event shall the authors or copyright holders be liable for any claim, damages
 // or other liability, whether in action or contract, tort or otherwise, arising
 // from, out of or in connection with the Software or the use of Software.
@@ -37,7 +37,7 @@ int main(void)
   //
   // Configure the interrupt controller
   //
-  rd = initGIC();
+  rd = initGIC(); // GIC == Generic Interrupt Controller
 
   // Secure Physical Timer      (INTID 29)
   setIntPriority(29, rd, 0);

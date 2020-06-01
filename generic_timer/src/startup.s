@@ -11,20 +11,27 @@
 // evaluation.
 //
 // You accept that the Software has not been tested by Arm therefore the Software
-// is provided “as is”, without warranty of any kind, express or implied. In no
+// is provided as is, without warranty of any kind, express or implied. In no
 // event shall the authors or copyright holders be liable for any claim, damages
 // or other liability, whether in action or contract, tort or otherwise, arising
 // from, out of or in connection with the Software or the use of Software.
 //
 // ------------------------------------------------------------
 
-  .section  BOOT,"ax"
-  .align 3
+// ARMv8-A is the first 64/32-bit architecture of ARM,
+// while ARMv8-R is 32-bit architectures (Cortex),
+// ARMv6 is 32-bit architectures (legacy).
+
+// ELF = Executable and Linkable Format
+
+// DUI0774I_armclang_reference_guide
+  .section  BOOT, "ax" // Allocatable and eXecutable section which is named "boot".
+  .align 3 // alias to .p2align, `3` is exponent (not byte).
 
 // ------------------------------------------------------------
 
-  .global start64
-  .type start64, @function
+  .global start64 // `.global` set symbol `start64` can be referenced from another linked object.
+  .type start64, @function // this set type of symbol to `@function`.
 start64:
 
   // Clear registers
@@ -67,7 +74,7 @@ start64:
   // ----------------------------
   // Core 0.0.0.0 should continue to execute
   // All other cores should be put into sleep (WFI)
-  MRS      x0, MPIDR_EL1
+  MRS      x0, MPIDR_EL1	   // MRS: transfer data from specific register to general purpose register.
   UBFX     x1, x0, #32, #8     // Extract Aff3
   BFI      w0, w1, #24, #8     // Insert Aff3 into bits [31:24], so that [31:0] 
                                // is now Aff3.Aff2.Aff1.Aff0
