@@ -8,6 +8,7 @@ language.settings.xml
 *.axf
 *.mk
 *.o
+*.d
 
 .lock
 .log

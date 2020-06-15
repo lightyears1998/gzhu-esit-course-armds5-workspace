@@ -18,6 +18,7 @@
 // ------------------------------------------------------------
 
 #include <stdio.h>
+#include <string.h>
 #include "gicv3_basic.h"
 #include "generic_timer.h"
 #include "system_counter.h"
@@ -33,11 +34,44 @@ volatile int tick = -1;
 
 int main(void)
 {
+
+#ifdef TEST_C
+  // Test basic C function
+  {
+    printf("Test: sizeof(uint8_t) = %zu\n", sizeof(uint8_t));
+    printf("Test: sizeof(uint16_t) = %zu\n", sizeof(uint16_t));
+    printf("Test: sizeof(uint32_t) = %zu\n", sizeof(uint32_t));
+    printf("Test: sizeof(uint64_t) = %zu\n", sizeof(uint64_t));
+  }
+#endif // TEST_C
+
   //
   // Configure UART
   //
   SER_Init();
   print("UART is ready.\r\n");
+
+#ifdef TEST_UART_BLOCK_READING
+  // Test UART block reading
+  {
+	int i = 0;
+	char buffer[128], ch = 0;
+
+	print("Test: Say something to test block reading: \r\n> ");
+    while (ch != '\n') {
+      ch = SER_GetChar();
+      SER_PutChar(ch);
+      buffer[i++] = ch;
+    }
+    buffer[i - 2] = '\0';
+
+    if (strlen(buffer) > 0) {
+      print("Test: I heard \"%s\", which is good enough.\r\n", buffer);
+    } else {
+      print("Test: I heard nothing!\r\n");
+    }
+  }
+#endif // TEST_UART_BLOCK_READING
 
   uint64_t current_time;
   uint32_t rd;
@@ -47,16 +81,15 @@ int main(void)
   //
   rd = initGIC(); // GIC == Generic Interrupt Controller
 
-  // Secure Physical Timer      (INTID 29)
+  // Secure Physical Timer (INTID 29)
   setIntPriority(29, rd, 0);
   setIntGroup(29, rd, 0);
   enableInt(29, rd);
 
-  // Non-Secure EL1 Physical Timer  (INTID 30)
-  setIntPriority(30, rd, 0);
-  setIntGroup(30, rd, 0);
-  enableInt(30, rd);
-
+  // UART0, PL011 (INTID 37)
+  setIntPriority(37, rd, 0);
+  setIntGroup(37, rd, 0);
+  enableInt(37, rd);
 
   //
   // Configure and enable the System Counter
@@ -65,7 +98,7 @@ int main(void)
 
   // Print timer frequency.
   {
-	  char msg[1024];
+	  char msg[64];
 	  sprintf(msg, "Timer frequency: %dHz\r\n", getCNTFID(SYSTEM_COUNTER_CNTCR_FREQ0));
 	  print(msg);
   }
@@ -93,9 +126,10 @@ int main(void)
   // this is done in the startup.s file
 
   //
-  // Spin until my CET6 pass.
+  // Spin until my CET6 pass
   //
-  while(tick < 10)
+  print("\r\n");
+  while(tick < 60)
   {
 	  continue;
   }
@@ -110,7 +144,7 @@ int main(void)
 void timerTick(void)
 {
   uint64_t current_time;
-  char msg[1024];
+  char msg[128];
 
   setSEL1PhysicalTimerCtrl(0);  // Disable timer to clear interrupt
   current_time = getPhysicalCount();
@@ -139,6 +173,9 @@ void fiqHandler(void)
     case 29:
       timerTick();
       printf("FIQ: Secure Physical Timer\n");
+      break;
+    case 37:
+      printf("FIQ: UART0, PL011\n");
       break;
     case 1023:
       printf("FIQ: Interrupt was spurious\n");

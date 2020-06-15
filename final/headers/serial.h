@@ -1,11 +1,11 @@
 #ifndef SERIAL_H_
 #define SERIAL_H_
 
-typedef unsigned          char uint8_t;
-typedef unsigned short     int uint16_t;
-typedef unsigned           int uint32_t;
-
-// armclang fail the following statement:
+// The following type definition is no longer needed,
+// because `stdint.h` of ArmClang has defined them.
+// typedef unsigned          char uint8_t;
+// typedef unsigned short     int uint16_t;
+// typedef unsigned           int uint32_t;
 // typedef unsigned       __int64 uint64_t;
 
 #define   __RO     volatile const

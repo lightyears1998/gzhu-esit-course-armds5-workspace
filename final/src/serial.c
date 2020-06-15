@@ -75,5 +75,5 @@ char SER_GetChar (void)
  *----------------------------------------------------------------------------*/
 void interrupt_SER(void)
 {
-    //your code here
+    // Keep this empty.
 }
