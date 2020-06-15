@@ -60,6 +60,12 @@ generic_timer.o: ./src/generic_timer.s
 gicv3_cpuif.o: ./src/gicv3_cpuif.S
 	$(AS) ${ASFLAGS} ./src/gicv3_cpuif.S
 
-$(EXECUTABLE): main.o generic_timer.o system_counter.o startup.o gicv3_basic.o gicv3_cpuif.o el3_vectors.o scatter.txt
-	$(LD) --scatter=scatter.txt main.o generic_timer.o system_counter.o startup.o gicv3_basic.o gicv3_cpuif.o el3_vectors.o -o $@ --entry=start64
+serial.o: ./src/serial.c
+	$(CC) ${CFLAGS} ./src/serial.c
+
+spider.o: ./src/spider.c
+	$(CC) ${CFLAGS} ./src/spider.c
+
+$(EXECUTABLE): main.o generic_timer.o system_counter.o startup.o gicv3_basic.o gicv3_cpuif.o el3_vectors.o serial.o spider.o scatter.txt
+	$(LD) --scatter=scatter.txt main.o generic_timer.o system_counter.o startup.o gicv3_basic.o gicv3_cpuif.o el3_vectors.o serial.o spider.o -o $@ --entry=start64
 

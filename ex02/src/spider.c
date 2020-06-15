@@ -5,7 +5,6 @@
 #include "serial.h"
 
 
-
 void print(char* msg,...){
 	char buf[4*1024];
 	char *p=&buf[0];
@@ -20,6 +19,7 @@ void print(char* msg,...){
 		p++;
 	}
 }
+
 
 void start(){
 	delay();

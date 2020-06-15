@@ -21,6 +21,7 @@
 #include "gicv3_basic.h"
 #include "generic_timer.h"
 #include "system_counter.h"
+#include "spider.h"
 
 extern uint32_t getAffinity(void);
 uint32_t initGIC(void);
@@ -31,6 +32,8 @@ volatile unsigned int flag;
 
 int main(void)
 {
+  start();
+
   uint64_t current_time;
   uint32_t rd;
 
