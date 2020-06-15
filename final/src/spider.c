@@ -28,15 +28,6 @@ void delay() {
 }
 
 
-void start(){
-	delay();
-
-
-	SER_Init();
-	print("Hello World!\r\n");
-}
-
-
 void xadd(char* s){
 	print(s);
 }

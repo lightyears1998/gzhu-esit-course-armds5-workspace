@@ -3,7 +3,7 @@
 extern "C"{
 #endif
 
-void start(void);
+
 void delay(void);
 void xadd(char* s);
 void print(char* msg,...);

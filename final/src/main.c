@@ -21,18 +21,23 @@
 #include "gicv3_basic.h"
 #include "generic_timer.h"
 #include "system_counter.h"
+#include "serial.h"
 #include "spider.h"
 
 extern uint32_t getAffinity(void);
 uint32_t initGIC(void);
 
-volatile unsigned int flag;
+volatile int tick = -1;
 
 // --------------------------------------------------------
 
 int main(void)
 {
-  start();
+  //
+  // Configure UART
+  //
+  SER_Init();
+  print("UART is ready.\r\n");
 
   uint64_t current_time;
   uint32_t rd;
@@ -57,6 +62,15 @@ int main(void)
   // Configure and enable the System Counter
   //
   setSystemCounterBaseAddr(0x2a430000);  // Address of the System Counter
+
+  // Print timer frequency.
+  {
+	  char msg[1024];
+	  sprintf(msg, "Timer frequency: %dHz\r\n", getCNTFID(SYSTEM_COUNTER_CNTCR_FREQ0));
+	  print(msg);
+  }
+
+  // Enable timer
   initSystemCounter(SYSTEM_COUNTER_CNTCR_nHDBG,
                     SYSTEM_COUNTER_CNTCR_FREQ0,
                     SYSTEM_COUNTER_CNTCR_nSCALE);
@@ -71,11 +85,6 @@ int main(void)
   setSEL1PhysicalCompValue(current_time + 10000);
   setSEL1PhysicalTimerCtrl(CNTPS_CTL_ENABLE);
 
-  // Configure the Non-secure Physical Timer
-  // This uses the TVAL/timer to fire the timer in X ticks
-  setNSEL1PhysicalTimerValue(20000);
-  setNSEL1PhysicalTimerCtrl(CNTP_CTL_ENABLE);
-
 
   // NOTE:
   // This code assumes that the IRQ and FIQ exceptions
@@ -84,14 +93,34 @@ int main(void)
   // this is done in the startup.s file
 
   //
-  // Spin until interrupt
+  // Spin until my CET6 pass.
   //
-  while(flag < 2)
-  {}
+  while(tick < 10)
+  {
+	  continue;
+  }
   
   printf("Main(): Test end\n");
 
   return 1;
+}
+
+// --------------------------------------------------------
+
+void timerTick(void)
+{
+  uint64_t current_time;
+  char msg[1024];
+
+  setSEL1PhysicalTimerCtrl(0);  // Disable timer to clear interrupt
+  current_time = getPhysicalCount();
+
+  ++tick;
+  sprintf(msg, "[%d] %lu\r\n", tick, current_time);
+  print(msg);
+
+  setSEL1PhysicalCompValue(current_time + 100000000);
+  setSEL1PhysicalTimerCtrl(CNTPS_CTL_ENABLE);
 }
 
 // --------------------------------------------------------
@@ -108,12 +137,8 @@ void fiqHandler(void)
   switch (ID)
   {
     case 29:
-      setSEL1PhysicalTimerCtrl(0);  // Disable timer to clear interrupt
+      timerTick();
       printf("FIQ: Secure Physical Timer\n");
-      break;
-    case 30:
-      setNSEL1PhysicalTimerCtrl(0);  // Disable timer to clear interrupt
-      printf("FIQ: Non-secure EL1 Physical Timer\n");
       break;
     case 1023:
       printf("FIQ: Interrupt was spurious\n");
@@ -125,7 +150,6 @@ void fiqHandler(void)
   // Write EOIR to deactivate interrupt
   writeEOIGrp0(ID);
 
-  flag++;
   return;
 }
 
