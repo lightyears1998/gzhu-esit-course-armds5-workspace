@@ -141,7 +141,7 @@ uint32_t initGIC(void)
   // Get the ID of the Redistributor connected to this PE
   rd = getRedistID(getAffinity());
 
-  // Mark this core as beign active
+  // Mark this core as begin active
   wakeUpRedist(rd);
 
   // Configure the CPU interface
