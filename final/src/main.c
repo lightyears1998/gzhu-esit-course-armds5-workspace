@@ -19,6 +19,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <limits.h>
 #include "gicv3_basic.h"
 #include "generic_timer.h"
 #include "system_counter.h"
@@ -125,11 +127,14 @@ int main(void)
   // and that the PSTATE masks are clear.  In this example
   // this is done in the startup.s file
 
+  // Allow UART receive interrupt
+  SER_Set_RxInterrupt(1);
+
   //
   // Spin until my CET6 pass
   //
   print("\r\n");
-  while(tick < 60)
+  while(tick < INT_MAX)
   {
 	  continue;
   }
@@ -159,6 +164,24 @@ void timerTick(void)
 
 // --------------------------------------------------------
 
+void handleInput(void)
+{
+  char ch;
+
+  SER_Set_RxInterrupt(0);
+
+  ch = UART0->UARTDR;
+  if (!isspace(ch)) {
+	printf("UART: Received '%c'\n", ch);
+  } else {
+	printf("UART: Received character %d\n", (int)ch);
+  }
+
+  SER_Set_RxInterrupt(1);
+}
+
+// --------------------------------------------------------
+
 void fiqHandler(void)
 {
   unsigned int ID;
@@ -171,11 +194,12 @@ void fiqHandler(void)
   switch (ID)
   {
     case 29:
-      timerTick();
       printf("FIQ: Secure Physical Timer\n");
+      timerTick();
       break;
     case 37:
       printf("FIQ: UART0, PL011\n");
+      handleInput();
       break;
     case 1023:
       printf("FIQ: Interrupt was spurious\n");

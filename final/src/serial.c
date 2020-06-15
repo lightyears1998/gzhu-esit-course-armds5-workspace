@@ -4,8 +4,9 @@ void SER_Init(void)
 {
     SER_Disable();  // Disable UART
     SER_Set_baud_rate( 38400 );
-    UART0->UARTLCR_H = UART_LCRH_WLEN_8 | UART_LCRH_FEN; // 8 bits, 1 stop bit, no parity, FIFO enabled
-    SER_Enable();   // Enable UART and enable TX/RX
+    // UART0->UARTLCR_H = UART_LCRH_WLEN_8 | UART_LCRH_FEN;  // 8 bits, 1 stop bit, no parity, FIFO enabled
+    UART0->UARTLCR_H = UART_LCRH_WLEN_8;  // 8 bits, 1 stop bit, no parity and FIFO disabled
+    SER_Enable();  // Enable UART and enable TX/RX
 }
 
 /*----------------------------------------------------------------------------
@@ -22,6 +23,15 @@ void SER_Enable(void)
 void SER_Disable(void)
 {
     UART0->UARTCR = 0x0;
+}
+
+/*----------------------------------------------------------------------------
+  Set Receive Interrupt
+ *----------------------------------------------------------------------------*/
+void SER_Set_RxInterrupt(int flag)
+{
+	// write 1 to enable while write 0 to clear.
+	UART0->UARTIMSC = (flag & 1) << 4;
 }
 
 /*----------------------------------------------------------------------------
@@ -66,14 +76,7 @@ void SER_PutChar(char c)
  *----------------------------------------------------------------------------*/
 char SER_GetChar (void)
 {
-    while (UART0->UARTFR & 0x10);   // Wait for a character to arrive
+    while (UART0->UARTFR & 0x10);  // Wait for a character to arrive
     return UART0->UARTDR;
 }
 
-/*----------------------------------------------------------------------------
-  Serial UART interrupt handler
- *----------------------------------------------------------------------------*/
-void interrupt_SER(void)
-{
-    // Keep this empty.
-}

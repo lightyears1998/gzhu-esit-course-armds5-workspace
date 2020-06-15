@@ -7,6 +7,7 @@
 // typedef unsigned short     int uint16_t;
 // typedef unsigned           int uint32_t;
 // typedef unsigned       __int64 uint64_t;
+#include <stdint.h>
 
 #define   __RO     volatile const
 #define   __WO     volatile
@@ -97,6 +98,6 @@ extern void SER_Disable(void);
 extern char SER_GetChar (void);
 extern void SER_PutChar(char c);
 extern void SER_Set_baud_rate(uint32_t baud_rate);
-extern void interrupt_SER(void);
+extern void SER_Set_RxInterrupt(int flag);
 
 #endif /* SERIAL_H_ */
