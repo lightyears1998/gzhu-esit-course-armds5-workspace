@@ -52,21 +52,21 @@
 				<configuration artifactExtension="axf" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="clean" description="" id="com.arm.eclipse.build.config.v6.exe.release.668534850" name="Release" parent="com.arm.eclipse.build.config.v6.exe.release">
 					<folderInfo id="com.arm.eclipse.build.config.v6.exe.release.668534850." name="/" resourcePath="">
 						<toolChain id="com.arm.toolchain.v6.exe.release.104089250" name="ARM Compiler 6 (DS-5 built-in)" superClass="com.arm.toolchain.v6.exe.release">
-							<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.none" id="com.arm.toolchain.v6.base.options.debug.level.459308321" superClass="com.arm.toolchain.v6.base.options.debug.level" valueType="enumerated"/>
+							<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.none" id="com.arm.toolchain.v6.base.options.debug.level.459308321" name="Debug Level" superClass="com.arm.toolchain.v6.base.options.debug.level" valueType="enumerated"/>
 							<targetPlatform id="com.arm.eclipse.build.config.v6.exe.release.668534850..49303348" name=""/>
-							<builder buildPath="${workspace_loc:/final}/Release" id="com.arm.toolchain.v6.builder.175862220" managedBuildOn="true" name="Gnu Make Builder.Release" superClass="com.arm.toolchain.v6.builder"/>
+							<builder buildPath="${workspace_loc:/final}/Release" id="com.arm.toolchain.v6.builder.175862220" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="com.arm.toolchain.v6.builder"/>
 							<tool id="com.arm.tool.c.compiler.v6.61221871" name="ARM C Compiler 6" superClass="com.arm.tool.c.compiler.v6">
-								<option defaultValue="com.arm.tool.c.compiler.v6.base.option.optlevel.high" id="com.arm.tool.c.compiler.v6.base.option.optlevel.5830316" superClass="com.arm.tool.c.compiler.v6.base.option.optlevel" useByScannerDiscovery="true" valueType="enumerated"/>
-								<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.none" id="com.arm.tool.c.compiler.v6.base.options.debug.level.944005402" superClass="com.arm.tool.c.compiler.v6.base.options.debug.level" useByScannerDiscovery="true" valueType="enumerated"/>
+								<option defaultValue="com.arm.tool.c.compiler.v6.base.option.optlevel.high" id="com.arm.tool.c.compiler.v6.base.option.optlevel.5830316" name="Optimization level" superClass="com.arm.tool.c.compiler.v6.base.option.optlevel" useByScannerDiscovery="true" valueType="enumerated"/>
+								<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.none" id="com.arm.tool.c.compiler.v6.base.options.debug.level.944005402" name="Debug Level" superClass="com.arm.tool.c.compiler.v6.base.options.debug.level" useByScannerDiscovery="true" valueType="enumerated"/>
 								<inputType id="com.arm.tool.c.compiler.v6.base.input.2042484921" superClass="com.arm.tool.c.compiler.v6.base.input"/>
 								<inputType id="com.arm.tool.cpp.compiler.v6.base.input.2057092903" superClass="com.arm.tool.cpp.compiler.v6.base.input"/>
 							</tool>
 							<tool id="com.arm.tool.cpp.compiler.v6.361218866" name="ARM C++ Compiler 6" superClass="com.arm.tool.cpp.compiler.v6">
-								<option defaultValue="com.arm.tool.c.compiler.v6.base.option.optlevel.high" id="com.arm.tool.c.compiler.v6.base.option.optlevel.302836124" superClass="com.arm.tool.c.compiler.v6.base.option.optlevel" valueType="enumerated"/>
-								<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.none" id="com.arm.tool.c.compiler.v6.base.options.debug.level.33836973" superClass="com.arm.tool.c.compiler.v6.base.options.debug.level" valueType="enumerated"/>
+								<option defaultValue="com.arm.tool.c.compiler.v6.base.option.optlevel.high" id="com.arm.tool.c.compiler.v6.base.option.optlevel.302836124" name="Optimization level" superClass="com.arm.tool.c.compiler.v6.base.option.optlevel" valueType="enumerated"/>
+								<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.none" id="com.arm.tool.c.compiler.v6.base.options.debug.level.33836973" name="Debug Level" superClass="com.arm.tool.c.compiler.v6.base.options.debug.level" valueType="enumerated"/>
 							</tool>
 							<tool id="com.arm.tool.assembler.v6.494294649" name="ARM Assembler 6" superClass="com.arm.tool.assembler.v6">
-								<option defaultValue="com.arm.tool.assembler.v6.base.options.debug.level.none" id="com.arm.tool.assembler.v6.base.options.debug.level.349421106" superClass="com.arm.tool.assembler.v6.base.options.debug.level" valueType="enumerated"/>
+								<option defaultValue="com.arm.tool.assembler.v6.base.options.debug.level.none" id="com.arm.tool.assembler.v6.base.options.debug.level.349421106" name="Debug Level" superClass="com.arm.tool.assembler.v6.base.options.debug.level" valueType="enumerated"/>
 								<inputType id="com.arm.tool.assembler.v6.base.input.467227022" superClass="com.arm.tool.assembler.v6.base.input"/>
 							</tool>
 							<tool id="com.arm.tool.c.linker.v6.183192539" name="ARM Linker 6" superClass="com.arm.tool.c.linker.v6"/>
