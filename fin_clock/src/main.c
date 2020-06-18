@@ -119,37 +119,45 @@ int main(void)
 
 // --------------------------------------------------------
 
-void timerTick(void)
+void displayClock(void)
 {
-  uint64_t current_time;
   char msg[128];
 
-  setSEL1PhysicalTimerCtrl(0);  // Disable timer to clear interrupt
-  current_time = getPhysicalCount();
-
-  ++tick;
   if (showClock) {
 	sprintf(msg, "Clock: %02d:%02d\r", tick / 60, tick % 60);
 	print(msg);
   }
   ignite(tick);
+}
 
+void resetTimer(void)
+{
+  uint64_t current_time;
+
+  setSEL1PhysicalTimerCtrl(0);
+  current_time = getPhysicalCount();
   setSEL1PhysicalCompValue(current_time + 100000000);
   setSEL1PhysicalTimerCtrl(CNTPS_CTL_ENABLE);
 }
 
+void timerTick(void)
+{
+  resetTimer();
+  ++tick;
+  displayClock();
+}
+
 // --------------------------------------------------------
 
-char inputBuffer[128];
-bool inputHasTerminated = false;
-
-void receiveInput(void)
+void handleInput(void)
 {
+  static char buf[128];
+  static int idx;
   char ch;
-  static int idx = 0;
 
   SER_Set_RxInterrupt(0);
 
+debug:
   ch = UART0->UARTDR;
   if (!isspace(ch)) {
 	printf("UART: Received '%c'\n", ch);
@@ -157,8 +165,10 @@ void receiveInput(void)
 	printf("UART: Received character %d\n", (int)ch);
   }
 
+switch_context:
   if (showClock) {
 	showClock = false;
+	idx = 0;
 
 	print("\r(set time) > ");
     if (ch == '\r') {
@@ -167,6 +177,7 @@ void receiveInput(void)
     }
   }
 
+handle_special_input:
   if (ch == '\b') {
 	if (idx > 0) {
 	  --idx;
@@ -175,40 +186,38 @@ void receiveInput(void)
 	goto out;
   }
 
-  if (idx == sizeof(inputBuffer) - 1) {
+storage_input:
+  if (idx == sizeof(buf) - 1) {
 	print("\r\nClock: (Error) Input too long!\r\n");
-	idx = 0;
+	showClock = true;
 	goto out;
   }
+  buf[idx++] = ch;
 
-  inputBuffer[idx++] = ch;
+echo_input:
   SER_PutChar(ch);
 
+if_input_ends:
   if (ch == '\n') {
-	inputBuffer[idx] = '\0';
-	idx = 0;
-	inputHasTerminated = true;
-  }
+	buf[idx] = '\0';
 
-out:
-  SER_Set_RxInterrupt(1);
-}
-
-void handleInput(void)
-{
-  if (inputHasTerminated) {
     int minute = 0, second = 0;
-	int argc = sscanf(inputBuffer, "%d:%d", &minute, &second);
+	int argc = sscanf(buf, "%d:%d", &minute, &second);
 	int neoTick = minute * 60 + second;
 	if (argc == 2 && neoTick > 0) {
 	  tick = neoTick;
+	  resetTimer();
 	} else {
 	  print("Clock: (Error) Invalid Time Format!\r\n");
 	}
 
+	print("\r\n");
 	showClock = true;
-	inputHasTerminated = false;
+	displayClock();
   }
+
+out:
+  SER_Set_RxInterrupt(1);
 }
 
 // --------------------------------------------------------
@@ -222,7 +231,6 @@ void fiqHandler(void)
 
   printf("FIQ: Received INTID %d\n", ID);
 
-  // Top-half of interrupt
   switch (ID)
   {
     case 29:
@@ -231,7 +239,7 @@ void fiqHandler(void)
       break;
     case 37:
       printf("FIQ: UART0, PL011\n");
-      receiveInput();
+      handleInput();
       break;
     case 1023:
       printf("FIQ: Interrupt was spurious\n");
@@ -242,14 +250,6 @@ void fiqHandler(void)
 
   // Write EOIR to deactivate interrupt
   writeEOIGrp0(ID);
-
-  // Bottom-half of interrupt
-  switch (ID)
-  {
-    case 37: // FIQ: UART0, PL011
-      handleInput();
-      break;
-  }
 
   return;
 }
