@@ -140,12 +140,14 @@ void timerTick(void)
 
 // --------------------------------------------------------
 
-void handleInput(void)
-{
-  char ch, buf[128];
-  int idx = 0;
+char inputBuffer[128];
+bool inputHasTerminated = false;
 
-  showClock = false;
+void receiveInput(void)
+{
+  char ch;
+  static int idx = 0;
+
   SER_Set_RxInterrupt(0);
 
   ch = UART0->UARTDR;
@@ -155,44 +157,58 @@ void handleInput(void)
 	printf("UART: Received character %d\n", (int)ch);
   }
 
-  print("\r(set time) > ");
+  if (showClock) {
+	showClock = false;
 
-  if (ch == '\r') {
-	SER_GetChar();
+	print("\r(set time) > ");
+    if (ch == '\r') {
+	  SER_GetChar();
+	  goto out;
+    }
   }
 
-  while (ch != '\n') {
-	ch = SER_GetChar();
-
-	if (ch == '\b') {
-	  if (idx > 0) {
-		--idx;
-		print("\b \b");
-	  }
-	  continue;
+  if (ch == '\b') {
+	if (idx > 0) {
+	  --idx;
+	  print("\b \b");
 	}
-
-	if (idx == sizeof(buf) - 1) {
-      print("Clock: (Error) Input too long!\r\n");
-	  break;
-	}
-
-	buf[idx++] = ch;
-	SER_PutChar(ch);
-  }
-  buf[idx] = 0;
-
-  int minute = 0, second = 0;
-  int argc = sscanf(buf, "%d:%d", &minute, &second);
-  int neoTick = minute * 60 + second;
-  if (argc == 2 && neoTick > 0) {
-	  tick = neoTick;
-  } else {
-	  print("Clock: (Error) Invalid Time Format!\r\n");
+	goto out;
   }
 
-  showClock = true;
+  if (idx == sizeof(inputBuffer) - 1) {
+	print("\r\nClock: (Error) Input too long!\r\n");
+	idx = 0;
+	goto out;
+  }
+
+  inputBuffer[idx++] = ch;
+  SER_PutChar(ch);
+
+  if (ch == '\n') {
+	inputBuffer[idx] = '\0';
+	idx = 0;
+	inputHasTerminated = true;
+  }
+
+out:
   SER_Set_RxInterrupt(1);
+}
+
+void handleInput(void)
+{
+  if (inputHasTerminated) {
+    int minute = 0, second = 0;
+	int argc = sscanf(inputBuffer, "%d:%d", &minute, &second);
+	int neoTick = minute * 60 + second;
+	if (argc == 2 && neoTick > 0) {
+	  tick = neoTick;
+	} else {
+	  print("Clock: (Error) Invalid Time Format!\r\n");
+	}
+
+	showClock = true;
+	inputHasTerminated = false;
+  }
 }
 
 // --------------------------------------------------------
@@ -206,6 +222,7 @@ void fiqHandler(void)
 
   printf("FIQ: Received INTID %d\n", ID);
 
+  // Top-half of interrupt
   switch (ID)
   {
     case 29:
@@ -214,7 +231,7 @@ void fiqHandler(void)
       break;
     case 37:
       printf("FIQ: UART0, PL011\n");
-      handleInput();
+      receiveInput();
       break;
     case 1023:
       printf("FIQ: Interrupt was spurious\n");
@@ -225,6 +242,14 @@ void fiqHandler(void)
 
   // Write EOIR to deactivate interrupt
   writeEOIGrp0(ID);
+
+  // Bottom-half of interrupt
+  switch (ID)
+  {
+    case 37: // FIQ: UART0, PL011
+      handleInput();
+      break;
+  }
 
   return;
 }
