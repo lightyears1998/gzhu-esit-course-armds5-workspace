@@ -8,7 +8,6 @@
 ;  Undefined (und): Entered when an undefined instruction is executed
 
 
-
 ;Pre-defined constants
 USERMODE    EQU 	0x10; 10000
 FIQMODE     EQU 	0x11; 10001
@@ -86,13 +85,13 @@ loop2
 
 	ldr r1, =0x100		; r1 = 0x100
 0
-	mov r1,r1,lsr #1	; r1 = r1 >> 1
-	str r1,[r0]			; m[r0] = r1
+	mov r1, r1, lsr #1	; r1 = r1 >> 1
+	str r1, [r0]		; m[r0] = r1
 	cmp r1, #0x0
 	bne %B0
 
 	bl start
-	ldr r0,=msg
+	ldr r0, =msg
 	bl xadd
 
 0
@@ -108,40 +107,40 @@ msg dcb "it's a trial\r\n"
 
 	align
 initStacks
-	mrs	r0,cpsr
+	mrs	r0, cpsr
 	; Move cpsr to r0
 	; cpsr / spsr = current / saved program status register
 
-	bic	r0,r0,#MODEMASK		; r0 = BIC(r0, #MODEMASK)
-	orr	r1,r0,#UNDEFMODE :OR: NOINT		; r1 = r0 | (#UNDEFMODE | NOINT)
-	msr	cpsr_cxsf,r1		;UndefMode
-	ldr	sp,=UndefStack		; UndefStack=0x33FF_5C00
+	bic	r0, r0, #MODEMASK		; r0 = BIC(r0, #MODEMASK)
+	orr	r1, r0, #UNDEFMODE :OR: NOINT		; r1 = r0 | (#UNDEFMODE | NOINT)
+	msr	cpsr_cxsf, r1		;UndefMode
+	ldr	sp, =UndefStack		; UndefStack=0x33FF_5C00
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#ABORTMODE :OR: NOINT
-	msr	cpsr_cxsf,r1		;AbortMode
-	ldr	sp,=AbortStack		; AbortStack=0x33FF_6000
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #ABORTMODE :OR: NOINT
+	msr	cpsr_cxsf, r1		;AbortMode
+	ldr	sp, =AbortStack		; AbortStack=0x33FF_6000
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#IRQMODE :OR: NOINT
-	msr	cpsr_cxsf,r1		;IRQMode
-	ldr	sp,=IRQStack		; IRQStack=0x33FF_7000
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #IRQMODE :OR: NOINT
+	msr	cpsr_cxsf, r1		;IRQMode
+	ldr	sp, =IRQStack		; IRQStack=0x33FF_7000
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#FIQMODE :OR: NOINT
-	msr	cpsr_cxsf,r1		;FIQMode
-	ldr	sp,=FIQStack		; FIQStack=0x33FF_8000
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #FIQMODE :OR: NOINT
+	msr	cpsr_cxsf, r1		;FIQMode
+	ldr	sp, =FIQStack		; FIQStack=0x33FF_8000
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#SVCMODE
-	msr	cpsr_cxsf,r1		;SVCMode
-	ldr	sp,=SVCStack		; SVCStack=0x33FF_5800
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #SVCMODE
+	msr	cpsr_cxsf, r1		;SVCMode
+	ldr	sp, =SVCStack		; SVCStack=0x33FF_5800
 
-	mov	pc,lr
+	mov	pc, lr
 
 delay
 	export delay
 
-	mov pc,lr
+	mov pc, lr
 
 	END
