@@ -11,7 +11,7 @@
 // evaluation.
 //
 // You accept that the Software has not been tested by Arm therefore the Software
-// is provided “as is”, without warranty of any kind, express or implied. In no
+// is provided as is, without warranty of any kind, express or implied. In no
 // event shall the authors or copyright holders be liable for any claim, damages
 // or other liability, whether in action or contract, tort or otherwise, arising
 // from, out of or in connection with the Software or the use of Software.
@@ -21,15 +21,16 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 #include "gicv3_registers.h"
 #include "gicv3_basic.h"
 
 // The first release of ARM Compiler 6 does not support the DSB
 // intrinsic.  Re-creating manually.
-static __inline void __dsb(void)
-{
-  asm("dsb sy");
-}
+//static __inline void __dsb(void)
+//{
+//  asm("dsb sy");
+//}
 
 // ------------------------------------------------------------
 // Setting location of interfaces

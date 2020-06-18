@@ -16,7 +16,7 @@
 						<toolChain id="com.arm.toolchain.v6.exe.debug.825716679" name="ARM Compiler 6 (DS-5 built-in)" superClass="com.arm.toolchain.v6.exe.debug">
 							<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.std" id="com.arm.toolchain.v6.base.options.debug.level.1684115831" name="Debug Level" superClass="com.arm.toolchain.v6.base.options.debug.level" valueType="enumerated"/>
 							<targetPlatform id="com.arm.eclipse.build.config.v6.exe.debug.550023520..1841459248" name=""/>
-							<builder buildPath="${workspace_loc:/final}" id="com.arm.toolchain.v6.builder.864040783" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="com.arm.toolchain.v6.builder"/>
+							<builder buildPath="${workspace_loc:/fin_clock}" id="com.arm.toolchain.v6.builder.864040783" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="com.arm.toolchain.v6.builder"/>
 							<tool id="com.arm.tool.c.compiler.v6.1726662355" name="ARM C Compiler 6" superClass="com.arm.tool.c.compiler.v6">
 								<option defaultValue="com.arm.tool.c.compiler.v6.base.option.optlevel.min" id="com.arm.tool.c.compiler.v6.base.option.optlevel.429783865" name="Optimization level" superClass="com.arm.tool.c.compiler.v6.base.option.optlevel" useByScannerDiscovery="true" valueType="enumerated"/>
 								<option defaultValue="com.arm.tool.c.compiler.v6.base.options.debug.level.std" id="com.arm.tool.c.compiler.v6.base.options.debug.level.495638484" name="Debug Level" superClass="com.arm.tool.c.compiler.v6.base.options.debug.level" useByScannerDiscovery="true" valueType="enumerated"/>
@@ -89,10 +89,11 @@
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Debug">
-			<resource resourceType="PROJECT" workspacePath="/final"/>
+			<resource resourceType="PROJECT" workspacePath="/fin_clock"/>
 		</configuration>
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/final"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
