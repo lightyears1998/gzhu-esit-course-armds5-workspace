@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.arm.debugger.launcher2">
 <mapAttribute key="AverageDurationTracker">
-<mapEntry key="*Fetching Data Model" value="1150898"/>
-<mapEntry key="*list global low level symbols" value="2523055"/>
-<mapEntry key="*loading values from target" value="28537017"/>
-<mapEntry key="*updating variables" value="6179445"/>
-<mapEntry key="AddEventObserver" value="14681689"/>
-<mapEntry key="Evaluate" value="4203536"/>
-<mapEntry key="Retrieving globals list" value="30080699"/>
+<mapEntry key="*Fetching Data Model" value="4791706"/>
+<mapEntry key="*list global low level symbols" value="2941105"/>
+<mapEntry key="*loading values from target" value="4271456"/>
+<mapEntry key="*updating variables" value="1652984"/>
+<mapEntry key="AddEventObserver" value="7805673"/>
+<mapEntry key="Evaluate" value="1542445"/>
+<mapEntry key="Retrieving globals list" value="7352913"/>
+<mapEntry key="areCachesAvailable" value="398125"/>
 <mapEntry key="break" value="9620512"/>
-<mapEntry key="continue" value="28063282"/>
-<mapEntry key="disassemble" value="249984939"/>
-<mapEntry key="evaluate" value="11853684"/>
-<mapEntry key="get capabilities" value="4438869"/>
-<mapEntry key="get execution addresss" value="459011"/>
-<mapEntry key="get source lines" value="424755"/>
-<mapEntry key="initialize command help" value="78100083"/>
+<mapEntry key="continue" value="108832617"/>
+<mapEntry key="disassemble" value="133013654"/>
+<mapEntry key="evaluate" value="6196151"/>
+<mapEntry key="get capabilities" value="833447"/>
+<mapEntry key="get execution addresss" value="368227"/>
+<mapEntry key="get source lines" value="408696"/>
+<mapEntry key="getValidEncodings" value="673000"/>
+<mapEntry key="initialize command help" value="56367910"/>
 <mapEntry key="interrupt" value="2283900"/>
-<mapEntry key="list breakpoint options" value="481795"/>
-<mapEntry key="list breakpoints" value="2925588"/>
-<mapEntry key="list instruction sets" value="1524376"/>
-<mapEntry key="list signals" value="10802273"/>
-<mapEntry key="list watchpoint options" value="756346"/>
-<mapEntry key="list watchpoints" value="1957236"/>
-<mapEntry key="loadfile" value="245433346"/>
+<mapEntry key="list breakpoint options" value="157414"/>
+<mapEntry key="list breakpoints" value="960740"/>
+<mapEntry key="list instruction sets" value="2350682"/>
+<mapEntry key="list signals" value="3533813"/>
+<mapEntry key="list watchpoint options" value="864544"/>
+<mapEntry key="list watchpoints" value="780019"/>
+<mapEntry key="loadfile" value="100024641"/>
 <mapEntry key="next" value="62749378"/>
 <mapEntry key="remove" value="2729512"/>
-<mapEntry key="set CWD" value="4657764"/>
+<mapEntry key="set CWD" value="4095949"/>
 <mapEntry key="set breakpoint properties" value="13594124"/>
-<mapEntry key="set debug-from" value="6376152"/>
-<mapEntry key="start" value="198644392"/>
+<mapEntry key="set debug-from" value="3385807"/>
+<mapEntry key="start" value="117771860"/>
 <mapEntry key="step" value="32422875"/>
 <mapEntry key="toggleBreakpoint" value="9402700"/>
-<mapEntry key="waitForTargetToStop" value="14554177"/>
+<mapEntry key="waitForTargetToStop" value="8531562"/>
 </mapAttribute>
 <intAttribute key="DEBUG_TAB..RESOURCES.COUNT" value="0"/>
 <intAttribute key="FILES.CONNECT_TO_GDB_SERVER.RESOURCES.COUNT" value="0"/>
@@ -50,25 +52,29 @@
 <listAttribute key="FILES.DOWNLOAD_AND_DEBUG"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.OPTION.ON_DEMAND_LOAD" value="true"/>
-<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.TYPE" value="TARGET_WORKING_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.VALUE" value=""/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.OPTION.ON_DEMAND_LOAD" value="true"/>
-<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
+<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.TYPE" value="TARGET_DOWNLOAD_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.VALUE" value=""/>
-<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.TYPE" value="TARGET_DOWNLOAD_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
+<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.OPTION.ON_DEMAND_LOAD" value="true"/>
+<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.TYPE" value="TARGET_WORKING_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.VALUE" value=""/>
 <intAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.COUNT" value="3"/>
 <listAttribute key="FILES.DOWNLOAD_DEBUG"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.OPTION.ON_DEMAND_LOAD" value="true"/>
-<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.TYPE" value="TARGET_WORKING_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.VALUE" value=""/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.OPTION.ON_DEMAND_LOAD" value="true"/>
-<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
+<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.TYPE" value="TARGET_DOWNLOAD_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.VALUE" value=""/>
-<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.TYPE" value="TARGET_DOWNLOAD_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
+<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.OPTION.ON_DEMAND_LOAD" value="true"/>
+<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.TYPE" value="TARGET_WORKING_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.VALUE" value=""/>
 <intAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.COUNT" value="3"/>
 <intAttribute key="FILES.DOWNLOAD_DEBUG_ANDROID.RESOURCES.COUNT" value="0"/>
@@ -79,7 +85,7 @@
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.OPTION.ON_DEMAND_LOAD" value="true"/>
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
-<stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.VALUE" value="${workspace_loc:/final/image.axf}"/>
+<stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.VALUE" value="${workspace_loc:/fin_clock/image.axf}"/>
 <intAttribute key="FILES.ICE_DEBUG.RESOURCES.COUNT" value="1"/>
 <listAttribute key="FILES.ICE_DEBUG_WITH_ETB_TRACE">
 <listEntry value="ON_DEMAND_LOAD"/>
@@ -128,6 +134,42 @@
 <listAttribute key="com.arm.debug.views.common.AddressTracker.debugger.view.DisassemblyView.ranges">
 <listEntry value="100"/>
 </listAttribute>
+<listAttribute key="com.arm.debug.views.common.AddressTracker.debugger.view.MemoryView.addresses">
+<listEntry value=""/>
+<listEntry value="0x80018000"/>
+<listEntry value="0x80018000"/>
+<listEntry value="0x80014000"/>
+<listEntry value="0x80019FF0"/>
+<listEntry value="0x80015FF0"/>
+<listEntry value="0x80014000"/>
+<listEntry value="0x80014000"/>
+<listEntry value="0x80016000"/>
+<listEntry value="0x80019FF0"/>
+<listEntry value="0x80015FFF"/>
+<listEntry value="0x80015F0"/>
+<listEntry value="80016000"/>
+<listEntry value="80014000"/>
+<listEntry value="80014000"/>
+<listEntry value="80014000"/>
+</listAttribute>
+<listAttribute key="com.arm.debug.views.common.AddressTracker.debugger.view.MemoryView.ranges">
+<listEntry value=""/>
+<listEntry value="160"/>
+<listEntry value="16"/>
+<listEntry value="160"/>
+<listEntry value="160"/>
+<listEntry value="160"/>
+<listEntry value="10"/>
+<listEntry value="16"/>
+<listEntry value="16"/>
+<listEntry value="16"/>
+<listEntry value="160"/>
+<listEntry value="160"/>
+<listEntry value="16"/>
+<listEntry value="4"/>
+<listEntry value="16"/>
+<listEntry value="1024"/>
+</listAttribute>
 <stringAttribute key="config_db_activity_name" value="Debug Cortex-A35"/>
 <stringAttribute key="config_db_connection_keys" value="dtsl_config dtsl_tracecapture_option dtsl_config_script model_params config_file setup TCP_KILL_ON_EXIT TCP_DISABLE_EXTENDED_MODE"/>
 <stringAttribute key="config_db_connection_type" value="Bare Metal Debug"/>
@@ -141,7 +183,12 @@
 <listEntry value="&lt;Next Instruction&gt;"/>
 <listEntry value="100"/>
 </listAttribute>
-<stringAttribute key="debugger.view.VariableTreeView:DebugOutlineColumnState" value="OutlineConfig1&#9;8&#9;0&#9;true&#9;true&#9;217&#9;-1&#9;true&#9;1&#9;false&#9;true&#9;138&#9;-1&#9;true&#9;2&#9;true&#9;true&#9;236&#9;-1&#9;true&#9;3&#9;true&#9;true&#9;87&#9;-1&#9;true&#9;4&#9;true&#9;true&#9;68&#9;-1&#9;true&#9;5&#9;true&#9;true&#9;51&#9;-1&#9;true&#9;6&#9;true&#9;true&#9;248&#9;-1&#9;true&#9;7&#9;true&#9;true&#9;74&#9;-1&#9;true"/>
+<stringAttribute key="debugger.view.MemoryView" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;page&gt;&#10;&#9;&lt;memoryView/&gt;&#10;&lt;/page&gt;&#10;"/>
+<listAttribute key="debugger.view.MemoryView:current">
+<listEntry value=""/>
+<listEntry value=""/>
+</listAttribute>
+<stringAttribute key="debugger.view.VariableTreeView:DebugOutlineColumnState" value="OutlineConfig1&#9;8&#9;0&#9;true&#9;true&#9;217&#9;-1&#9;true&#9;1&#9;false&#9;true&#9;138&#9;-1&#9;true&#9;2&#9;true&#9;true&#9;147&#9;-1&#9;true&#9;3&#9;true&#9;true&#9;59&#9;-1&#9;true&#9;4&#9;true&#9;true&#9;68&#9;-1&#9;true&#9;5&#9;true&#9;true&#9;51&#9;-1&#9;true&#9;6&#9;true&#9;true&#9;90&#9;-1&#9;true&#9;7&#9;true&#9;true&#9;74&#9;-1&#9;true"/>
 <listAttribute key="debugger.view.VariableTreeView:USER_ADDED_FILE_STATICS"/>
 <listAttribute key="debugger.view.VariableTreeView:USER_ADDED_GLOBALS"/>
 <booleanAttribute key="debugger.view.variable.DrawAsHex" value="false"/>
