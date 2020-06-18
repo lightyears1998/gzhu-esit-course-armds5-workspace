@@ -1,11 +1,4 @@
-.metadata/.lock
-.metadata/.log
-.metadata/version.ini
-.metadata/.plugins/*
-
-# Debug configurations
-!.metadata/.plugins/org.eclipse.debug.core
-
+.metadata
 .ut.dat
 debugger/.td.dat
 RemoteSystemsTempFiles

@@ -2,7 +2,7 @@
 
 广州大学 ESiT 课程中的练习代码。
 
-课程中使用的 IDE 是 Arm DS-5 v5.26.0。
+课程中使用的 IDE 是 Arm DS-5 v5.26.0，docs 目录下的 `.launch` 文件是该 IDE 的调试插件（`org.eclipse.debug.core`）的配置文件。
 
 ## ex01
 
