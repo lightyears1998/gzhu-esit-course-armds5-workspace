@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.arm.debugger.launcher2">
 <mapAttribute key="AverageDurationTracker">
-<mapEntry key="*Fetching Data Model" value="4791706"/>
-<mapEntry key="*list global low level symbols" value="2941105"/>
-<mapEntry key="*loading values from target" value="4271456"/>
-<mapEntry key="*updating variables" value="1652984"/>
-<mapEntry key="AddEventObserver" value="7805673"/>
-<mapEntry key="Evaluate" value="1542445"/>
-<mapEntry key="Retrieving globals list" value="7352913"/>
-<mapEntry key="areCachesAvailable" value="398125"/>
-<mapEntry key="break" value="9620512"/>
-<mapEntry key="continue" value="108832617"/>
-<mapEntry key="disassemble" value="133013654"/>
-<mapEntry key="evaluate" value="6196151"/>
-<mapEntry key="get capabilities" value="833447"/>
-<mapEntry key="get execution addresss" value="368227"/>
-<mapEntry key="get source lines" value="408696"/>
-<mapEntry key="getValidEncodings" value="673000"/>
-<mapEntry key="initialize command help" value="56367910"/>
-<mapEntry key="interrupt" value="2283900"/>
-<mapEntry key="list breakpoint options" value="157414"/>
-<mapEntry key="list breakpoints" value="960740"/>
-<mapEntry key="list instruction sets" value="2350682"/>
-<mapEntry key="list signals" value="3533813"/>
-<mapEntry key="list watchpoint options" value="864544"/>
-<mapEntry key="list watchpoints" value="780019"/>
-<mapEntry key="loadfile" value="100024641"/>
-<mapEntry key="next" value="62749378"/>
-<mapEntry key="remove" value="2729512"/>
-<mapEntry key="set CWD" value="4095949"/>
-<mapEntry key="set breakpoint properties" value="13594124"/>
-<mapEntry key="set debug-from" value="3385807"/>
-<mapEntry key="start" value="117771860"/>
-<mapEntry key="step" value="32422875"/>
-<mapEntry key="toggleBreakpoint" value="9402700"/>
-<mapEntry key="waitForTargetToStop" value="8531562"/>
+<mapEntry key="*Fetching Data Model" value="232131"/>
+<mapEntry key="*list global low level symbols" value="935618"/>
+<mapEntry key="*loading memory from target" value="15086001"/>
+<mapEntry key="*loading values from target" value="4319169"/>
+<mapEntry key="*updating variables" value="1106148"/>
+<mapEntry key="AddEventObserver" value="4386113"/>
+<mapEntry key="Evaluate" value="1105529"/>
+<mapEntry key="Retrieving globals list" value="4617579"/>
+<mapEntry key="areCachesAvailable" value="442492"/>
+<mapEntry key="break" value="18080664"/>
+<mapEntry key="continue" value="19691498"/>
+<mapEntry key="disassemble" value="111423427"/>
+<mapEntry key="evaluate" value="3602630"/>
+<mapEntry key="get byte order" value="700648"/>
+<mapEntry key="get capabilities" value="173135"/>
+<mapEntry key="get execution addresss" value="466062"/>
+<mapEntry key="get source lines" value="282908"/>
+<mapEntry key="getValidEncodings" value="420127"/>
+<mapEntry key="initialize command help" value="51014995"/>
+<mapEntry key="interrupt" value="3492712"/>
+<mapEntry key="list breakpoint options" value="163287"/>
+<mapEntry key="list breakpoints" value="272143"/>
+<mapEntry key="list instruction sets" value="476324"/>
+<mapEntry key="list signals" value="1804936"/>
+<mapEntry key="list watchpoint options" value="449706"/>
+<mapEntry key="list watchpoints" value="1273087"/>
+<mapEntry key="loadfile" value="41391544"/>
+<mapEntry key="next" value="33538916"/>
+<mapEntry key="reload-symbol-file" value="50387500"/>
+<mapEntry key="remove" value="3645678"/>
+<mapEntry key="set CWD" value="3272867"/>
+<mapEntry key="set breakpoint properties" value="10077815"/>
+<mapEntry key="set debug-from" value="1399827"/>
+<mapEntry key="start" value="71020019"/>
+<mapEntry key="step" value="37358037"/>
+<mapEntry key="toggleBreakpoint" value="9279950"/>
+<mapEntry key="waitForTargetToStop" value="16013486"/>
 </mapAttribute>
 <intAttribute key="DEBUG_TAB..RESOURCES.COUNT" value="0"/>
 <intAttribute key="FILES.CONNECT_TO_GDB_SERVER.RESOURCES.COUNT" value="0"/>
@@ -136,6 +139,7 @@
 </listAttribute>
 <listAttribute key="com.arm.debug.views.common.AddressTracker.debugger.view.MemoryView.addresses">
 <listEntry value=""/>
+<listEntry value="0x1C010000"/>
 <listEntry value="0x80018000"/>
 <listEntry value="0x80018000"/>
 <listEntry value="0x80014000"/>
@@ -154,6 +158,7 @@
 </listAttribute>
 <listAttribute key="com.arm.debug.views.common.AddressTracker.debugger.view.MemoryView.ranges">
 <listEntry value=""/>
+<listEntry value="32"/>
 <listEntry value="160"/>
 <listEntry value="16"/>
 <listEntry value="160"/>
@@ -188,7 +193,7 @@
 <listEntry value=""/>
 <listEntry value=""/>
 </listAttribute>
-<stringAttribute key="debugger.view.VariableTreeView:DebugOutlineColumnState" value="OutlineConfig1&#9;8&#9;0&#9;true&#9;true&#9;217&#9;-1&#9;true&#9;1&#9;false&#9;true&#9;138&#9;-1&#9;true&#9;2&#9;true&#9;true&#9;147&#9;-1&#9;true&#9;3&#9;true&#9;true&#9;59&#9;-1&#9;true&#9;4&#9;true&#9;true&#9;68&#9;-1&#9;true&#9;5&#9;true&#9;true&#9;51&#9;-1&#9;true&#9;6&#9;true&#9;true&#9;90&#9;-1&#9;true&#9;7&#9;true&#9;true&#9;74&#9;-1&#9;true"/>
+<stringAttribute key="debugger.view.VariableTreeView:DebugOutlineColumnState" value="OutlineConfig1&#9;8&#9;0&#9;true&#9;true&#9;217&#9;-1&#9;true&#9;1&#9;false&#9;true&#9;138&#9;-1&#9;true&#9;2&#9;true&#9;true&#9;236&#9;-1&#9;true&#9;3&#9;true&#9;true&#9;87&#9;-1&#9;true&#9;4&#9;true&#9;true&#9;68&#9;-1&#9;true&#9;5&#9;true&#9;true&#9;51&#9;-1&#9;true&#9;6&#9;true&#9;true&#9;248&#9;-1&#9;true&#9;7&#9;true&#9;true&#9;74&#9;-1&#9;true"/>
 <listAttribute key="debugger.view.VariableTreeView:USER_ADDED_FILE_STATICS"/>
 <listAttribute key="debugger.view.VariableTreeView:USER_ADDED_GLOBALS"/>
 <booleanAttribute key="debugger.view.variable.DrawAsHex" value="false"/>

@@ -18,34 +18,30 @@
 // ------------------------------------------------------------
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 #include <limits.h>
+#include "led.h"
 #include "gicv3_basic.h"
 #include "generic_timer.h"
 #include "system_counter.h"
 #include "serial.h"
 #include "spider.h"
 
+void runTest(void);
 extern uint32_t getAffinity(void);
 uint32_t initGIC(void);
 
+volatile bool showClock = true;
 volatile int tick = -1;
 
 // --------------------------------------------------------
 
 int main(void)
 {
-
-#ifdef TEST_C
-  // Test basic C function
-  {
-    printf("Test: sizeof(uint8_t) = %zu\n", sizeof(uint8_t));
-    printf("Test: sizeof(uint16_t) = %zu\n", sizeof(uint16_t));
-    printf("Test: sizeof(uint32_t) = %zu\n", sizeof(uint32_t));
-    printf("Test: sizeof(uint64_t) = %zu\n", sizeof(uint64_t));
-  }
-#endif // TEST_C
+  uint64_t current_time;
+  uint32_t rd;
 
   //
   // Configure UART
@@ -53,30 +49,7 @@ int main(void)
   SER_Init();
   print("UART is ready.\r\n");
 
-#ifdef TEST_UART_BLOCK_READING
-  // Test UART block reading
-  {
-	int i = 0;
-	char buffer[128], ch = 0;
-
-	print("Test: Say something to test block reading: \r\n> ");
-    while (ch != '\n') {
-      ch = SER_GetChar();
-      SER_PutChar(ch);
-      buffer[i++] = ch;
-    }
-    buffer[i - 2] = '\0';
-
-    if (strlen(buffer) > 0) {
-      print("Test: I heard \"%s\", which is good enough.\r\n", buffer);
-    } else {
-      print("Test: I heard nothing!\r\n");
-    }
-  }
-#endif // TEST_UART_BLOCK_READING
-
-  uint64_t current_time;
-  uint32_t rd;
+  runTest();
 
   //
   // Configure the interrupt controller
@@ -155,8 +128,11 @@ void timerTick(void)
   current_time = getPhysicalCount();
 
   ++tick;
-  sprintf(msg, "[%d] %lu\r\n", tick, current_time);
-  print(msg);
+  if (showClock) {
+	sprintf(msg, "Clock: %02d:%02d\r", tick / 60, tick % 60);
+	print(msg);
+  }
+  ignite(tick);
 
   setSEL1PhysicalCompValue(current_time + 100000000);
   setSEL1PhysicalTimerCtrl(CNTPS_CTL_ENABLE);
@@ -166,8 +142,10 @@ void timerTick(void)
 
 void handleInput(void)
 {
-  char ch;
+  char ch, buf[128];
+  int idx = 0;
 
+  showClock = false;
   SER_Set_RxInterrupt(0);
 
   ch = UART0->UARTDR;
@@ -177,6 +155,43 @@ void handleInput(void)
 	printf("UART: Received character %d\n", (int)ch);
   }
 
+  print("\r(set time) > ");
+
+  if (ch == '\r') {
+	SER_GetChar();
+  }
+
+  while (ch != '\n') {
+	ch = SER_GetChar();
+
+	if (ch == '\b') {
+	  if (idx > 0) {
+		--idx;
+		print("\b \b");
+	  }
+	  continue;
+	}
+
+	if (idx == sizeof(buf) - 1) {
+      print("Clock: (Error) Input too long!\r\n");
+	  break;
+	}
+
+	buf[idx++] = ch;
+	SER_PutChar(ch);
+  }
+  buf[idx] = 0;
+
+  int minute = 0, second = 0;
+  int argc = sscanf(buf, "%d:%d", &minute, &second);
+  int neoTick = minute * 60 + second;
+  if (argc == 2 && neoTick > 0) {
+	  tick = neoTick;
+  } else {
+	  print("Clock: (Error) Invalid Time Format!\r\n");
+  }
+
+  showClock = true;
   SER_Set_RxInterrupt(1);
 }
 
@@ -239,4 +254,47 @@ uint32_t initGIC(void)
   enableGroup1Ints();
 
   return rd;
+}
+
+// --------------------------------------------------------
+
+void runTest(void)
+{
+#ifdef TEST_C
+  // Test basic C function
+  {
+    printf("Test: sizeof(uint8_t) = %zu\n", sizeof(uint8_t));
+    printf("Test: sizeof(uint16_t) = %zu\n", sizeof(uint16_t));
+    printf("Test: sizeof(uint32_t) = %zu\n", sizeof(uint32_t));
+    printf("Test: sizeof(uint64_t) = %zu\n", sizeof(uint64_t));
+  }
+#endif // TEST_C
+
+#ifdef TEST_UART_BLOCK_READING
+  // Test UART block reading
+  {
+	int i = 0;
+	char buffer[128], ch = 0;
+
+	print("Test: Say something to test block reading: \r\n> ");
+    while (ch != '\n') {
+      ch = SER_GetChar();
+      SER_PutChar(ch);
+      buffer[i++] = ch;
+    }
+    buffer[i - 2] = '\0';
+
+    if (strlen(buffer) > 0) {
+      print("Test: I heard \"%s\", which is good enough.\r\n", buffer);
+    } else {
+      print("Test: I heard nothing!\r\n");
+    }
+  }
+#endif // TEST_UART_BLOCK_READING
+
+#ifdef TEST_LED
+  for (int i = 1; i <= 256; ++i) {
+	*LED = i;
+  }
+#endif // TEST_LED
 }
