@@ -15,8 +15,8 @@ _STACK_BASEADDRESS	EQU 0xFFFF0000
 
 UserStack		EQU	(_STACK_BASEADDRESS - 0x100000*1)
 SVCStack		EQU	(_STACK_BASEADDRESS - 0x100000*2)
-UndefStack	EQU	(_STACK_BASEADDRESS - 0x100000*3)
-AbortStack	EQU	(_STACK_BASEADDRESS - 0x100000*4)
+UndefStack		EQU	(_STACK_BASEADDRESS - 0x100000*3)
+AbortStack		EQU	(_STACK_BASEADDRESS - 0x100000*4)
 IRQStack		EQU	(_STACK_BASEADDRESS - 0x100000*5)
 FIQStack		EQU	(_STACK_BASEADDRESS - 0x100000*6)
 SYSStack		EQU	(_STACK_BASEADDRESS - 0x100000*7)
@@ -39,9 +39,9 @@ __ENTRY
 
 	ldr r1, =0x1
 0
-	str r1,[r0]
-	mov r1,r1,lsl #1
-	cmp r1,#0x100
+	str r1, [r0]
+	mov r1, r1, lsl #1
+	cmp r1, #0x100
 	bne %B0
 
 0
@@ -61,36 +61,36 @@ msg dcb "it's a trial"
 initStacks
 	mrs	r0,cpsr
 
-	bic	r0,r0,#MODEMASK
-	orr	r1,r0,#UNDEFMODE :OR: NOINT
-	msr	cpsr_cxsf,r1		;UndefMode
-	ldr	sp,=UndefStack		; UndefStack=0x33FF_5C00
+	bic	r0, r0, #MODEMASK
+	orr	r1, r0, #UNDEFMODE :OR: NOINT
+	msr	cpsr_cxsf, r1		;UndefMode
+	ldr	sp, =UndefStack		; UndefStack=0x33FF_5C00
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#ABORTMODE :OR: NOINT
-	msr	cpsr_cxsf,r1		;AbortMode
-	ldr	sp,=AbortStack		; AbortStack=0x33FF_6000
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #ABORTMODE :OR: NOINT
+	msr	cpsr_cxsf, r1		;AbortMode
+	ldr	sp, =AbortStack		; AbortStack=0x33FF_6000
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#IRQMODE :OR: NOINT
-	msr	cpsr_cxsf,r1		;IRQMode
-	ldr	sp,=IRQStack		; IRQStack=0x33FF_7000
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #IRQMODE :OR: NOINT
+	msr	cpsr_cxsf, r1		;IRQMode
+	ldr	sp, =IRQStack		; IRQStack=0x33FF_7000
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#FIQMODE :OR: NOINT
-	msr	cpsr_cxsf,r1		;FIQMode
-	ldr	sp,=FIQStack		; FIQStack=0x33FF_8000
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #FIQMODE :OR: NOINT
+	msr	cpsr_cxsf, r1		;FIQMode
+	ldr	sp, =FIQStack		; FIQStack=0x33FF_8000
 
-	bic	r0,r0,#MODEMASK :OR: NOINT
-	orr	r1,r0,#SVCMODE
-	msr	cpsr_cxsf,r1		;SVCMode
-	ldr	sp,=SVCStack		; SVCStack=0x33FF_5800
+	bic	r0, r0, #MODEMASK :OR: NOINT
+	orr	r1, r0, #SVCMODE
+	msr	cpsr_cxsf, r1		;SVCMode
+	ldr	sp, =SVCStack		; SVCStack=0x33FF_5800
 
-	mov	pc,lr
+	mov	pc, lr
 
 delay
 	export delay
 
-	mov pc,lr
+	mov pc, lr
 
 	END
