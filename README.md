@@ -24,7 +24,10 @@
 
 ## fin_clock
 
-Todo
+实现基于中断的时钟。将时钟输出到 UART0；
+以模拟器上的 LED 表示时间秒数的变化，即每秒 LED 变化一次。
+
+![fin.gif](docs/fin.gif)
 
 ---
 
